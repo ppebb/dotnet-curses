@@ -246,5 +246,10 @@ namespace Mindmagma.Curses
             int result = Native.wscrl(window, numberOfLines);
             NativeExceptionHelper.ThrowOnFailure(result, nameof(WindowScrollLines));
         }
+
+        public static void WindowChangeAttribute(IntPtr window, int numberOfCharacters, uint attributes, short pair, IntPtr opts) {
+            int result = Native.wchgat(window, numberOfCharacters, attributes, pair, opts);
+            NativeExceptionHelper.ThrowOnFailure(result, nameof(WindowChangeAttribute));
+        }
     }
 }

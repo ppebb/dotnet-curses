@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
 #pragma warning disable IDE1006 // naming rule violation, methods must begin with uppercase
 
@@ -206,5 +205,10 @@ namespace Mindmagma.Curses.Interop
         private delegate int dt_wscrl(IntPtr window, int numberOfLines);
         private static dt_wscrl call_wscrl = NativeToDelegate<dt_wscrl>("wscrl");
         internal static int wscrl(IntPtr window, int numberOfLines) => call_wscrl(window, numberOfLines);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int dt_wchgat(IntPtr window, int numberOfCharacters, uint attributes, short pair, IntPtr opts);
+        private static dt_wchgat call_wchgat= NativeToDelegate<dt_wchgat>("wchgat");
+        internal static int wchgat(IntPtr window, int numberOfCharacters, uint attributes, short pair, IntPtr opts) => call_wchgat(window, numberOfCharacters, attributes, pair, opts);
     }
 }
