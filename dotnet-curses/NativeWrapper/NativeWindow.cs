@@ -208,7 +208,12 @@ namespace Mindmagma.Curses.Interop
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int dt_wchgat(IntPtr window, int numberOfCharacters, uint attributes, short pair, IntPtr opts);
-        private static dt_wchgat call_wchgat= NativeToDelegate<dt_wchgat>("wchgat");
+        private static dt_wchgat call_wchgat = NativeToDelegate<dt_wchgat>("wchgat");
         internal static int wchgat(IntPtr window, int numberOfCharacters, uint attributes, short pair, IntPtr opts) => call_wchgat(window, numberOfCharacters, attributes, pair, opts);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int dt_wresize(IntPtr window, int lines, int columns);
+        private static dt_wresize call_wresize = NativeToDelegate<dt_wresize>("wresize");
+        internal static int wresize(IntPtr window, int lines, int columns) => call_wresize(window, lines, columns);
     }
 }
