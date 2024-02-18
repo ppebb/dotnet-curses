@@ -255,5 +255,9 @@ namespace Mindmagma.Curses.Interop
         private static dt_use_default_colors call_use_default_colors = NativeToDelegate<dt_use_default_colors>("use_default_colors");
         internal static int use_default_colors() => call_use_default_colors();
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate IntPtr dt_keyname(int key);
+        private static dt_keyname call_keyname = NativeToDelegate<dt_keyname>("keyname");
+        internal static IntPtr keyname(int key) => call_keyname(key);
     }
 }

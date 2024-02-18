@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Text;
 using Mindmagma.Curses.Interop;
 
 // common functions
@@ -287,5 +289,12 @@ namespace Mindmagma.Curses
             NativeExceptionHelper.ThrowOnFailure(result, nameof(UseDefaultColors));
         }
 
+        public static string Keyname(int key)
+        {
+            IntPtr result = Native.keyname(key);
+            NativeExceptionHelper.ThrowOnFailure(result, nameof(Keyname));
+
+            return Marshal.PtrToStringAnsi(result);
+        }
     }
 }
