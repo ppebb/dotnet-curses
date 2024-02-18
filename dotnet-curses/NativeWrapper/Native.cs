@@ -19,7 +19,16 @@ namespace Mindmagma.Curses.Interop
     {
         private static D NativeToDelegate<D>(string exportedFunctionName)
         {
-            return NCursesLibraryHandle.lib.LoadFunction<D>(exportedFunctionName);
+            if (NCursesLibraryHandle.lib.LoadFunction<D>(exportedFunctionName, out D function))
+            {
+                return function;
+            }
+            else if (PanelLibraryHandle.lib.LoadFunction<D>(exportedFunctionName, out D function1))
+            {
+                return function1;
+            }
+
+            throw new InvalidOperationException($"No function was found with the name {exportedFunctionName}.");
         }
 
         private static int MarshalInt(string exportedSymbolName)

@@ -83,15 +83,17 @@ namespace NativeLibraryLoader
         /// <returns>A delegate wrapping the native function.</returns>
         /// <exception cref="InvalidOperationException">Thrown when no function with the given name
         /// is exported from the native library.</exception>
-        public T LoadFunction<T>(string name)
+        public bool LoadFunction<T>(string name, out T function)
         {
             IntPtr functionPtr = _loader.LoadFunctionPointer(Handle, name);
             if (functionPtr == IntPtr.Zero)
             {
-                throw new InvalidOperationException($"No function was found with the name {name}.");
+                function = default;
+                return false;
             }
 
-            return Marshal.GetDelegateForFunctionPointer<T>(functionPtr);
+            function = Marshal.GetDelegateForFunctionPointer<T>(functionPtr);
+            return true;
         }
 
         /// <summary>

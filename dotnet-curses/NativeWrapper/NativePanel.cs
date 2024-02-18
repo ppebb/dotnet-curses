@@ -10,9 +10,9 @@ namespace Mindmagma.Curses.Interop
     internal static partial class Native
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate int dt_bottom_panel(IntPtr panel);
+        private delegate int dt_bottom_panel(IntPtr pan);
         private static dt_bottom_panel call_bottom_panel = NativeToDelegate<dt_bottom_panel>("bottom_panel");
-        internal static int bottom_panel(IntPtr panel) => call_bottom_panel(panel);
+        internal static int bottom_panel(IntPtr pan) => call_bottom_panel(pan);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate IntPtr dt_ceiling_panel(IntPtr screen);
