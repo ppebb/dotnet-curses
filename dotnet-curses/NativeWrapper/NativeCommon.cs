@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -124,6 +124,11 @@ namespace Mindmagma.Curses.Interop
         private delegate int dt_getmouse(out MouseEvent mouseEvent);
         private static dt_getmouse call_getmouse = NativeToDelegate<dt_getmouse>("getmouse");
         internal static int getmouse(out MouseEvent mouseEvent) => call_getmouse(out mouseEvent);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int dt_mouseinterval(int erval);
+        private static dt_mouseinterval call_mouseinterval = NativeToDelegate<dt_mouseinterval>("mouseinterval");
+        internal static int mouseinterval(int erval) => call_mouseinterval(erval);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate int dt_getnstr(StringBuilder message, int numberOfCharacters);

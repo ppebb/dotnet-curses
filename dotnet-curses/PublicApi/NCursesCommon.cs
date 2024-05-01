@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using Mindmagma.Curses.Interop;
@@ -136,10 +136,17 @@ namespace Mindmagma.Curses
             return result;
         }
 
-        public static void GetMouse(out MouseEvent mouseEvent)
+        public static int GetMouse(out MouseEvent mouseEvent)
         {
-            int result = Native.getmouse(out mouseEvent);
-            NativeExceptionHelper.ThrowOnFailure(result, nameof(GetMouse));
+            int ret = Native.getmouse(out MouseEvent e);
+            mouseEvent = e;
+            return ret;
+        }
+
+        public static void MouseInterval(int erval)
+        {
+            int result = Native.mouseinterval(erval);
+            NativeExceptionHelper.ThrowOnFailure(result, nameof(MouseInterval));
         }
 
         public static void GetString(StringBuilder message, int numberOfCharacters)
